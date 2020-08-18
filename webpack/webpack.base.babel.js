@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 
-module.exports = options => ({
+module.exports = (options) => ({
   mode: options.mode,
   entry: options.entry,
   output: Object.assign(
@@ -9,7 +9,7 @@ module.exports = options => ({
       path: path.resolve(process.cwd(), 'build'),
       publicPath: '/',
     },
-    options.output,
+    options.output
   ),
   optimization: options.optimization,
   module: {
@@ -61,6 +61,7 @@ module.exports = options => ({
             options: {
               mozjpeg: {
                 enabled: false,
+                // enabled: true,
                 // progressive: true,
               },
               gifsicle: {

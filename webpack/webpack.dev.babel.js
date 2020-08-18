@@ -10,35 +10,43 @@ const plugins = [
     template: 'src/index.html',
   }),
   new CircularDependencyPlugin({
-    exclude: /a\.js|node_modules/, // exclude node_modules
-    failOnError: false, // show a warning when there is a circular dependency
+    exclude: /a\.js|node_modules/,
+    failOnError: false,
   }),
 ];
 
 module.exports = require('./webpack.base.babel')({
   mode: 'development',
+
   entry: [
     require.resolve('react-app-polyfill/ie11'),
     'webpack-dev-server/client?',
     'webpack/hot/only-dev-server',
     path.join(process.cwd(), 'src/index.jsx'),
   ],
+
   output: {
     filename: '[name].js',
     chunkFilename: '[name].chunk.js',
   },
+
   optimization: {
-    minimize: false,
+    splitChunks: {
+      chunks: 'all',
+    },
   },
-  plugins,
-  // faster for debugging
+
+  plugins: plugins,
+
   devtool: 'cheap-module-source-map',
+
   devServer: {
     hot: true,
     historyApiFallback: true,
     port: 3000,
     disableHostCheck: false,
   },
+
   performance: {
     hints: false,
   },
