@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,11 +9,14 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { loadRepos } from '../modules/repos/reposActions';
 
-/* eslint-disable no-shadow */
-const RepositoryList = ({ repos, loadRepos }) => {
+const RepositoryList = () => {
+  const dispatch = useDispatch();
+  const repos = useSelector((state) => state.repos);
+
   useEffect(() => {
-    loadRepos();
+    dispatch(loadRepos());
   }, []);
+
   return (
     <Paper>
       <Table>
@@ -27,7 +30,7 @@ const RepositoryList = ({ repos, loadRepos }) => {
         <TableBody>
           {!repos.loading &&
             Object.keys(repos.data).length !== 0 &&
-            Object.values(repos.data).map(repo => (
+            Object.values(repos.data).map((repo) => (
               <TableRow key={repo.id}>
                 <TableCell align="left">{repo.name}</TableCell>
                 <TableCell align="left">
@@ -44,20 +47,4 @@ const RepositoryList = ({ repos, loadRepos }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  repos: state.repos,
-});
-
-const mapDispatchToProps = {
-  loadRepos,
-};
-
-RepositoryList.propTypes = {
-  repos: PropTypes.object,
-  loadRepos: PropTypes.func,
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(RepositoryList);
+export default RepositoryList;

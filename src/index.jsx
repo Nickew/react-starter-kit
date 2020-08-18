@@ -12,8 +12,6 @@ import configureStore from './configureStore';
 
 import App from './containers/App';
 
-import './globalStyles.scss';
-
 const initialState = {};
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
