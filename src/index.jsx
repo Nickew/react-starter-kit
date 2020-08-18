@@ -1,12 +1,4 @@
 import 'regenerator-runtime/runtime';
-
-/* IE 10+ support */
-import 'core-js/modules/es.promise';
-import 'core-js/modules/es.array.iterator';
-import 'core-js/modules/es.object.values';
-import 'core-js/modules/es.set';
-import 'core-js/modules/es.map';
-
 import 'whatwg-fetch';
 
 import React from 'react';
@@ -35,7 +27,7 @@ const render = () => {
         <App />
       </ConnectedRouter>
     </Provider>,
-    MOUNT_NODE,
+    MOUNT_NODE
   );
 };
 

@@ -7,7 +7,10 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = require('./webpack.base.babel')({
   mode: 'production',
-  entry: [path.join(process.cwd(), 'src/index.jsx')],
+  entry: [
+    require.resolve('react-app-polyfill/ie11'),
+    path.join(process.cwd(), 'src/index.jsx'),
+  ],
   output: {
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].chunk.js',
@@ -87,7 +90,7 @@ module.exports = require('./webpack.base.babel')({
     new BundleAnalyzerPlugin(),
   ],
   performance: {
-    assetFilter: assetFilename =>
+    assetFilter: (assetFilename) =>
       !/(\.map$)|(^(main\.|favicon\.))/.test(assetFilename),
   },
 });

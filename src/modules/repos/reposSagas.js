@@ -4,9 +4,9 @@ import { reposLoaded, reposLoadingError } from './reposActions';
 import { LOAD_REPOS } from './reposConstants';
 
 function fetchReposApi() {
-  return fetch('https://api.github.com/users/Nickew/repos?sort=pushed').then(
-    response => response.json(),
-  );
+  return fetch(
+    'https://api.github.com/users/n1ghtdev/repos?sort=pushed'
+  ).then((response) => response.json());
 }
 
 function* fetchRepos() {

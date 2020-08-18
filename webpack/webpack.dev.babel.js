@@ -18,6 +18,7 @@ const plugins = [
 module.exports = require('./webpack.base.babel')({
   mode: 'development',
   entry: [
+    require.resolve('react-app-polyfill/ie11'),
     'webpack-dev-server/client?',
     'webpack/hot/only-dev-server',
     path.join(process.cwd(), 'src/index.jsx'),
